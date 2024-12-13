@@ -1,0 +1,20 @@
+{% extends "catalogue/base.html" %}  
+{% load static %}  
+
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top: 20px"> 
+        {% for obj in categories %}
+        <div class="col-md-4 mb-3">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ obj.image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="">{{ obj.name }}</a></h5>
+                    <p class="card-text">{{ obj.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

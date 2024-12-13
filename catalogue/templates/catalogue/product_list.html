@@ -1,0 +1,48 @@
+{% extends "catalogue/base.html" %}  
+{% load static %}      
+
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Categories on the left -->
+        <div class="col-md-3 bg-light p-3 rounded shadow-sm">
+            <h5 class="mb-3">Categories</h5>
+            <ul class="nav flex-column">
+                {% for category in all_category %}
+                <li class="nav-item mb-2">
+                    <a class="nav-link {% if category.id == selected_category %}active{% endif %}" href="{% url 'product_list_by_category' category.id %}">
+                        {{ category.name }}
+                    </a>
+                </li>  
+                {% empty %}
+                <li class="nav-item">
+                    <p>No categories available.</p>   
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Products on the right -->
+        <div class="col-md-9">
+            <div class="row">
+                {% for product in all_product %} 
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">   
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <p>No products found.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

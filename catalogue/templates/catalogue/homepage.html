@@ -1,0 +1,24 @@
+{% extends "catalogue/base.html" %}  
+{% load static %}  
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Image with Button</title>
+</head>
+<body style="margin: 0; padding: 0; height: 100%;">  
+    <!-- The container with background image and inline CSS -->
+    <div style="position: relative; background-image: url('https://media.istockphoto.com/id/1157789866/photo/modern-computer-laptop-with-blank-screen-on-counter-barand-window-view.jpg?s=2048x2048&w=is&k=20&c=KgVMg1JGddzy3Xhd53oQaXC1OV-Biq2Ks-VtPswP22E='); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; width: 100%;">
+        <!-- Button positioned on top of the image using inline CSS -->
+        <a href="{% url 'category_list' %}" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 15px 30px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-size: 18px; cursor: pointer; text-align: center;">
+            Click Me    
+        </a>   
+    </div> 
+</body>  
+</html>
+
+ 
+
+{% endblock %}  
