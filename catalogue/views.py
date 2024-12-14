@@ -5,7 +5,7 @@ from .models import Category, Product
 
 
 def category_list(request): 
-    all_cat = Category.objects.all()
+    all_cat = Category.objects.all() 
     context = {
         "categories": all_cat 
     }
@@ -33,4 +33,12 @@ def get_product_by_category_id(request, category_id=None):
 def homepage(request):
     
     return render(request,"catalogue/homepage.html") 
-     
+
+
+
+def product_detail(request, product_id):
+    product = Product.objects.get(id=product_id)  
+    context = {
+        'product': product 
+    }
+    return render(request, 'catalogue/product_detail.html', context)
