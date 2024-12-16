@@ -39,6 +39,7 @@ def homepage(request):
 def product_detail(request, product_id):
     product = Product.objects.get(id=product_id)  
     context = {
-        'product': product 
+        'product': product  
     }
     return render(request, 'catalogue/product_detail.html', context)
+

@@ -31,18 +31,23 @@
                     <div class="card h-100">   
                         <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">{{ product.description }}</p>
+                            <h5 class="card-title">
+                                <a href="{% url 'product_detail' product.id %}" class="text-decoration-none">
+                                    {{ product.name }}
+                                </a> 
+                            </h5> 
+                            <p class="card-text">{{ product.description }}</p> 
+                            <a href="#" class="btn btn-primary">Add to Cart</a> 
                         </div>
-                    </div>
+                    </div> 
                 </div>
                 {% empty %}
                 <div class="col-12">
-                    <p>No products found.</p>
+                    <p>No products found.</p> 
                 </div>
                 {% endfor %}
             </div>
         </div>
     </div>
-</div>
+</div> 
 {% endblock %} 
