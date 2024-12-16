@@ -10,9 +10,11 @@
         <div class="col-md-6">
             <h2>{{ product.name }}</h2>
             <p>{{ product.description }}</p>
+            <p><strong>Price:</strong> ${{ product.price }}</p>
+            <p><strong>Rating:</strong> {{ product.rating }} / 5.00</p>  
             {% comment %} <p><strong>Price:</strong> {{ product.price }}</p> {% endcomment %}
-            <a href="#" class="btn btn-primary">Add to Cart</a>
-        </div>
+            <a href="{% url 'add_to_basket' product.id %}" class="btn btn-primary">Add to Cart</a> 
+        </div> 
     </div>
 </div>
 {% endblock %}        

@@ -43,3 +43,5 @@ def product_detail(request, product_id):
     }
     return render(request, 'catalogue/product_detail.html', context)
 
+
+  
