@@ -17,7 +17,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "users",
-    "catalogue" 
+    "catalogue",  
+    "basket"
 ]
 
 MIDDLEWARE = [
@@ -31,6 +32,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "src.urls"
+BASKET_SESSION_ID = 'basket'   
 
 TEMPLATES = [
     {
@@ -45,14 +47,14 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
             ],
         },
-    },
+    },  
 ]
-
+ 
 WSGI_APPLICATION = "src.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
+        "ENGINE": "django.db.backends.sqlite3", 
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
