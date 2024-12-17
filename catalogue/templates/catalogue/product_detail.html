@@ -1,5 +1,5 @@
 {% extends "catalogue/base.html" %}
-{% load static %} 
+{% load static %}  
 
 {% block content %}
 <div class="container mt-4"> 
@@ -12,9 +12,9 @@
             <p>{{ product.description }}</p>
             <p><strong>Price:</strong> ${{ product.price }}</p>
             <p><strong>Rating:</strong> {{ product.rating }} / 5.00</p>  
-            {% comment %} <p><strong>Price:</strong> {{ product.price }}</p> {% endcomment %}
-            <a href="{% url 'add_to_basket' product.id %}" class="btn btn-primary">Add to Cart</a> 
+            <a href="{% url 'add_to_basket' product.id %}" class="btn btn-primary mt-3">Add to Cart</a>  
         </div> 
     </div>
-</div>
-{% endblock %}        
+</div> 
+{% endblock %}
+ 

@@ -1,11 +1,10 @@
-
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-sf@(1c_$3d=d=cu%b4)ik&1zd9&hro4c1fif7)=8vmk)v_da6="
 
-DEBUG = True 
+DEBUG = True
 
 ALLOWED_HOSTS = ["13.48.45.103", "*", ""]
 
@@ -17,8 +16,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "users",
-    "catalogue",  
-    "basket"
+    "catalogue",
+    "basket",
 ]
 
 MIDDLEWARE = [
@@ -32,7 +31,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "src.urls"
-BASKET_SESSION_ID = 'basket'   
+BASKET_SESSION_ID = "basket"
 
 TEMPLATES = [
     {
@@ -47,14 +46,14 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
             ],
         },
-    },  
+    },
 ]
- 
+
 WSGI_APPLICATION = "src.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3", 
+        "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
@@ -91,7 +90,8 @@ STATICFILES_DIRS = [
 ]
 
 import os
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
