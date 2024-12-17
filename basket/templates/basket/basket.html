@@ -1,24 +1,35 @@
+{% extends "catalogue/base.html" %}  
+{% load static %}  
+
+
+{% block content %}  
 <h2>Your Basket</h2>
 <table class="table">
     <thead>
         <tr>
             <th>Product</th>
-            <th>Quantity</th>
+            <th>Quantity</th> 
             <th>Price</th>
             <th>Total</th> 
         </tr>
     </thead>
-    <tbody> 
+    <tbody>  
         {% for item in basket %}
         <tr>
             <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>
-            <td>&euro; {{ item.price }}</td> 
+            <td>&euro; {{ item.price }}</td>   
             <td>&euro; {{ item.total_price }}</td>
+            <td>
+                <a href="{% url 'add_to_basket' item.product.id %}" class="btn btn-success btn-sm">+</a>
+                <a href="{% url 'remove_from_basket' item.product.id %}" class="btn btn-warning btn-sm">-</a>
+                <a href="{% url 'delete_from_basket' item.product.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
         </tr> 
-        {% endfor %}
+        {% endfor %} 
     </tbody> 
 </table>
+<div>Total: &euro; {{ basket.get_total_price }}</div> 
 
-<div>Total: &euro; {{ basket.get_total_price }}</div>
+{% endblock %} 
   
