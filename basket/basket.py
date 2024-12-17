@@ -17,7 +17,7 @@ class Basket:
         product_id = str(product.id) 
         
         if product_id not in self.basket:
-            self.basket[product_id] = {'quantity': 0, 'price': str(product.price)}
+            self.basket[product_id] = {'quantity': 0, 'price': str(product.price),'product_name': product.name}
 
         if override_quantity:
             self.basket[product_id]['quantity'] = quantity
@@ -42,16 +42,15 @@ class Basket:
             
     
     def delete(self, product_id): 
-        print(f"Removing product ID: {product_id}")  
         product_id = str(product_id)
         if product_id in self.basket:
             del self.basket[product_id]
             print(f"Product ID {product_id} removed from basket.")
             self.save()
         else:
-            print(f"Product ID {product_id} not found in basket.") 
+            print(f"Product ID {product_id} not found in basket.")  
             
-                    
+                      
     def get_total_price(self):
         return sum(Decimal(item['price']) * item['quantity'] for item in self.basket.values())
     
@@ -59,7 +58,7 @@ class Basket:
     def remove(self, product_id):
         product_id = str(product_id)  
         if product_id in self.basket:
-            if self.basket[product_id]['quantity'] > 1:
+            if self.basket[product_id]['quantity'] > 1: 
                 self.basket[product_id]['quantity'] -= 1
             else:
                 del self.basket[product_id]
@@ -73,5 +72,5 @@ class Basket:
         self.save() 
     
     def save(self):
-        self.session.modified = True   
-    
+        self.session.modified = True    
+     

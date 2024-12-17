@@ -24,16 +24,15 @@ def remove_from_basket(request, product_id: UUID):
 
 def basket_detail(request):
     basket = Basket(request)
-    print(dir(basket))
+    # print(dir(basket)) 
     return render(request, "basket/basket.html", {"basket": basket})
 
 
-def basket(request):
+def basket(request): 
     return {"basket": Basket(request)}
 
 
 def delete_from_basket(request, product_id: UUID):
-    print(f"Product to remove: {product_id}")
     basket = Basket(request)
     basket.delete(product_id)
-    return redirect("basket_detail")
+    return redirect("basket_detail")  
