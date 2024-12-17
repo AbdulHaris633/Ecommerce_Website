@@ -1,5 +1,9 @@
 from django.shortcuts import render
-from django.conf import settings
+from django.conf import*
+from django.http import HttpResponse
+
+# MC146416
+
 
 def checkout(request):
     # Retrieve basket data from session
@@ -24,3 +28,7 @@ def checkout(request):
         'total_price': total_price, 
     })
  
+ 
+def success(request): 
+    return HttpResponse("payment completed")  
+     
