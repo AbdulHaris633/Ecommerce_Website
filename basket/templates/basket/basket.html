@@ -17,8 +17,8 @@
         <tr>
             <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>
-            <td>&euro; {{ item.price }}</td>
-            <td>&euro; {{ item.total_price }}</td>
+            <td>PKR {{ item.price }}</td>
+            <td>PKR {{ item.total_price }}</td>  
             <td>
                 <a href="{% url 'add_to_basket' item.product.id %}" class="btn btn-success btn-sm">+</a>
                 <a href="{% url 'remove_from_basket' item.product.id %}" class="btn btn-warning btn-sm">-</a>
@@ -29,9 +29,9 @@
     </tbody>
 </table>
 <div class="d-flex justify-content-between align-items-center mt-3">
-    <h4>Total: &euro; {{ basket.get_total_price }}</h4>
+    <h4>Total: PKR {{ basket.get_total_price }}</h4>
     <a href="{% url 'checkout' %}" class="btn btn-primary">Proceed to Checkout</a>  
 </div>
-{% endblock %}   
+{% endblock %}    
 
   

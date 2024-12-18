@@ -37,7 +37,7 @@
                                 </a> 
                             </h5> 
                             <p class="card-text">{{ product.description }}</p> 
-                            <p><strong>Price:</strong> ${{ product.price }}</p>
+                            <p><strong>Price:</strong> PKR {{ product.price }}</p>  
                             <p><strong>Rating:</strong> {{ product.rating }} / 5.00</p>    
                             {% comment %} <a href="{% url 'add_to_basket' product.id %}" class="btn btn-primary">Add to Cart</a>   {% endcomment %}
                         </div> 
