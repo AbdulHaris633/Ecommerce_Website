@@ -4,8 +4,9 @@ from django.http import HttpResponse
  
 @csrf_exempt
 def success(request): 
+    request.session[settings.BASKET_SESSION_ID] = {}
     return HttpResponse("payment completed")  
 
 def fail(request): 
-    return HttpResponse("payment failed")      
+    return HttpResponse("payment failed")        
      

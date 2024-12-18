@@ -17,7 +17,7 @@ JAZZCASH_INTEGRITY_SALT = "3x2s596214"
 
 @csrf_exempt
 def checkout(request):
-    basket = request.session.get(settings.BASKET_SESSION_ID, {})
+    basket = request.session.get(settings.BASKET_SESSION_ID, {}) 
     items = []
 
     for product_id, item in basket.items():
