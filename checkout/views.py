@@ -17,11 +17,9 @@ JAZZCASH_INTEGRITY_SALT = "3x2s596214"
 
 @csrf_exempt
 def checkout(request):
-    # Retrieve basket data from session
     basket = request.session.get(settings.BASKET_SESSION_ID, {})
     items = []
 
-    # Prepare items and calculate the total price
     for product_id, item in basket.items():
         product_name = item.get('product_name', 'Unknown Product')
         quantity = int(item['quantity'])
@@ -34,10 +32,8 @@ def checkout(request):
             'total': item_total,
         })
 
-    # Calculate total price for the basket
     total_price = sum(item['total'] for item in items)
 
-    # JazzCash Payment Details
     current_datetime = datetime.now()
     pp_TxnDateTime = current_datetime.strftime('%Y%m%d%H%M%S')
     pp_TxnExpiryDateTime = (current_datetime + timedelta(hours=1)).strftime('%Y%m%d%H%M%S')
@@ -68,7 +64,6 @@ def checkout(request):
         "ppmpf_5": "5",
     }
 
-    # Generate Secure Hash
     sorted_string = '&'.join(f"{key}={value}" for key, value in sorted(post_data.items()) if value)
     pp_SecureHash = hmac.new(
         JAZZCASH_INTEGRITY_SALT.encode(),
@@ -83,28 +78,3 @@ def checkout(request):
         'post_data': post_data,
     })
 
-
-# def checkout(request):
-#     # Retrieve basket data from session
-#     basket = request.session.get(settings.BASKET_SESSION_ID, {})
-#     items = []
-
-#     for product_id, item in basket.items():
-#         product_name = item.get('product_name', 'Unknown Product')
-#         item_total = int(item['quantity']) * float(item['price'])  # Calculate total for each item
-#         items.append({
-#             'product': product_name,  
-#             'quantity': item['quantity'],  
-#             'price': item['price'],
-#             'total': item_total, 
-#         })
-    
-#     # Calculate total price for the basket
-#     total_price = sum(item['total'] for item in items)
-
-#     return render(request, 'checkout/checkout.html', {
-#         'items': items,
-#         'total_price': total_price, 
-#     })
- 
-    
