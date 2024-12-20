@@ -1,10 +1,11 @@
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
-from datetime import datetime, timedelta
 import hashlib
 import hmac
+from datetime import datetime, timedelta
+
 from django.conf import settings
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 # MC146416
 
@@ -17,35 +18,39 @@ JAZZCASH_INTEGRITY_SALT = "3x2s596214"
 
 @csrf_exempt
 def checkout(request):
-    basket = request.session.get(settings.BASKET_SESSION_ID, {}) 
+    basket = request.session.get(settings.BASKET_SESSION_ID, {})
     items = []
 
     for product_id, item in basket.items():
-        product_name = item.get('product_name', 'Unknown Product')
-        quantity = int(item['quantity'])
-        price = float(item['price'])
+        product_name = item.get("product_name", "Unknown Product")
+        quantity = int(item["quantity"])
+        price = float(item["price"])
         item_total = quantity * price
-        items.append({
-            'product': product_name,
-            'quantity': quantity,
-            'price': price,
-            'total': item_total,
-        })
+        items.append(
+            {
+                "product": product_name,
+                "quantity": quantity,
+                "price": price,
+                "total": item_total,
+            }
+        )
 
-    total_price = sum(item['total'] for item in items)
+    total_price = sum(item["total"] for item in items)
 
     current_datetime = datetime.now()
-    pp_TxnDateTime = current_datetime.strftime('%Y%m%d%H%M%S')
-    pp_TxnExpiryDateTime = (current_datetime + timedelta(hours=1)).strftime('%Y%m%d%H%M%S')
-    pp_TxnRefNo = 'T' + pp_TxnDateTime
+    pp_TxnDateTime = current_datetime.strftime("%Y%m%d%H%M%S")
+    pp_TxnExpiryDateTime = (current_datetime + timedelta(hours=1)).strftime(
+        "%Y%m%d%H%M%S"
+    )
+    pp_TxnRefNo = "T" + pp_TxnDateTime
 
     post_data = {
         "pp_Version": "1.0",
         "pp_TxnType": "MWALLET",
         "pp_Language": "EN",
-        "pp_MerchantID": JAZZCASH_MERCHANT_ID, 
+        "pp_MerchantID": JAZZCASH_MERCHANT_ID,
         "pp_SubMerchantID": "",
-        "pp_Password": JAZZCASH_PASSWORD, 
+        "pp_Password": JAZZCASH_PASSWORD,
         "pp_BankID": "TBANK",
         "pp_ProductID": "RETL",
         "pp_TxnRefNo": pp_TxnRefNo,
@@ -64,17 +69,20 @@ def checkout(request):
         "ppmpf_5": "5",
     }
 
-    sorted_string = '&'.join(f"{key}={value}" for key, value in sorted(post_data.items()) if value)
+    sorted_string = "&".join(
+        f"{key}={value}" for key, value in sorted(post_data.items()) if value
+    )
     pp_SecureHash = hmac.new(
-        JAZZCASH_INTEGRITY_SALT.encode(),
-        sorted_string.encode(),
-        hashlib.sha256
+        JAZZCASH_INTEGRITY_SALT.encode(), sorted_string.encode(), hashlib.sha256
     ).hexdigest()
-    post_data['pp_SecureHash'] = pp_SecureHash
+    post_data["pp_SecureHash"] = pp_SecureHash
 
-    return render(request, 'checkout/checkout.html', {
-        'items': items,
-        'total_price': total_price,
-        'post_data': post_data,
-    })
-
+    return render(
+        request,
+        "checkout/checkout.html",
+        {
+            "items": items,
+            "total_price": total_price,
+            "post_data": post_data,
+        },
+    )
