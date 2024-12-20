@@ -1,10 +1,13 @@
 from pathlib import Path
+from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-sf@(1c_$3d=d=cu%b4)ik&1zd9&hro4c1fif7)=8vmk)v_da6="
 
 DEBUG = True
+
+SITE_ID = 1
 
 ALLOWED_HOSTS = ["13.48.45.103", "*", ""] 
 
@@ -15,17 +18,24 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages", 
     "django.contrib.staticfiles",
+    'allauth',
+    'allauth.account',
+    'rest_framework.authtoken', 
+    'allauth.socialaccount',
+    'dj_rest_auth',
+    'rest_framework',  
     "users",
     "catalogue",
     "basket",
     "checkout",
-    "payment"  
+    "payment"   
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    'allauth.account.middleware.AccountMiddleware', 
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -97,4 +107,21 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField" 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+   
+IMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),  # Set the lifetime of the access token
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Set the lifetime of the refresh token
+    'ROTATE_REFRESH_TOKENS': False,                # Optionally rotate refresh tokens
+    'BLACKLIST_AFTER_ROTATION': True,              # Blacklist old tokens after rotation
+    'UPDATE_LAST_LOGIN': False,                    # Update last login field upon token refresh 
+}
 
