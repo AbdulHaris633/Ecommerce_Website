@@ -12,6 +12,7 @@ urlpatterns = [
     path("basket/", include("basket.urls")),
     path("checkout/", include("checkout.urls")),
     path("payment/", include("payment.urls")),
+    path("users/", include("users.urls")), 
     # These are api urls
     path("auth/", include("dj_rest_auth.urls")),
     path("auth/registration/", include("dj_rest_auth.registration.urls")),
@@ -28,6 +29,6 @@ urlpatterns = [
     path("api/basket/", my_basket),
     path("api/add_to_basket/", add_to_basket),
     path("api/remove_from_basket/", remove_from_basket),
-    path("api/delete_from_basket/", delete_from_basket),
+    path("api/delete_from_basket/", delete_from_basket), 
     path("api/checkout/", checkout),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
