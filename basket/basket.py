@@ -6,17 +6,22 @@ from catalogue.models import Product
 
 
 class Basket:
-
+  
     def __init__(self, request):
         self.session = request.session
         basket = self.session.get(settings.BASKET_SESSION_ID)
         if not basket:
             basket = self.session[settings.BASKET_SESSION_ID] = {}
-        self.basket = basket
+        self.basket = basket 
+        
+    def get_quantity(self, product_id):
+        """Retrieve the quantity of a product in the basket."""
+        product_id = str(product_id)  # Ensure it's a string since session keys are stored as strings
+        return self.basket.get(product_id, {}).get("quantity", 0)
 
     def add(self, product, quantity=1, override_quantity=False):
         product_id = str(product.id)
-
+ 
         if product_id not in self.basket:
             self.basket[product_id] = {
                 "quantity": 0,
@@ -29,7 +34,8 @@ class Basket:
         else:
             self.basket[product_id]["quantity"] += quantity
 
-        self.save()
+        self.save()  
+    
 
     def __iter__(self):
 
@@ -44,6 +50,7 @@ class Basket:
             item["price"] = Decimal(item["price"])
             item["total_price"] = item["price"] * item["quantity"]
             yield item
+    
 
     def delete(self, product_id):
         product_id = str(product_id)
