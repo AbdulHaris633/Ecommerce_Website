@@ -1,15 +1,15 @@
 import uuid
 
-from django.db import models
+from django.db import models 
 
 
 class ProductClass(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50, null=True)
 
-    def __str__(self):
-        return self.name
-
+    def __str__(self):   
+        return self.name     
+ 
 
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -18,8 +18,8 @@ class Category(models.Model):
     image = models.ImageField(upload_to="images/", blank=True)
     product_class = models.ForeignKey(ProductClass, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
+    def __str__(self):    
+        return self.name  
 
 
 class Product(models.Model):
@@ -30,6 +30,12 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     description = models.TextField(max_length=255, blank=True, null=True)
     image = models.ImageField(upload_to="images/", blank=True, null=True)
+    quantity = models.PositiveIntegerField(default=0)  # Stock availability
+    total_sold = models.PositiveIntegerField(default=0)  # Total units sold
+    sold_in_24_hours = models.PositiveIntegerField(default=0)  # Sales in last 24 hours
+    views_in_24_hours = models.PositiveIntegerField(default=0)  # Views in last 24 hours
+     
 
     def __str__(self):
         return self.name
+ 
