@@ -1,6 +1,7 @@
 from datetime import timedelta
 from pathlib import Path
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-sf@(1c_$3d=d=cu%b4)ik&1zd9&hro4c1fif7)=8vmk)v_da6="
@@ -24,13 +25,14 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "dj_rest_auth",
     "rest_framework",
-    "users",
+    "users",  
     "catalogue",
     "basket",
-    "checkout",
-    "payment",
+    "checkout",   
+    "payment", 
 ]
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -40,10 +42,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware", 
 ]
 
 ROOT_URLCONF = "src.urls"
-BASKET_SESSION_ID = "basket"
+BASKET_SESSION_ID = "basket"  
+LOGIN_URL = "/users/login/"  
 
 TEMPLATES = [
     {
@@ -101,7 +105,6 @@ STATICFILES_DIRS = [
     "staticfiles/",
 ]
 
-import os
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -126,3 +129,7 @@ IMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,  # Blacklist old tokens after rotation
     "UPDATE_LAST_LOGIN": False,  # Update last login field upon token refresh
 }
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+ 
