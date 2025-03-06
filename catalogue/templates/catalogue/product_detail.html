@@ -1,20 +1,147 @@
 {% extends "catalogue/base.html" %}
-{% load static %}  
+{% load static %}
 
 {% block content %}
-<div class="container mt-4"> 
+<div class="container mt-4">
     <div class="row">
+        <!-- Product Image -->
         <div class="col-md-6">
             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
-        </div>
+        </div> 
+        
+        <!-- Product Details -->
         <div class="col-md-6">
             <h2>{{ product.name }}</h2>
             <p>{{ product.description }}</p>
-            <p><strong>Price:</strong> PKR {{ product.price }}</p>  
-            <p><strong>Rating:</strong> {{ product.rating }} / 5.00</p>  
-            <a href="{% url 'add_to_basket' product.id %}" class="btn btn-primary mt-3">Add to Cart</a>  
-        </div> 
+            <p><strong>Price:</strong> PKR {{ product.price }}</p>
+            <p><strong>Rating:</strong> {{ product.rating }} / 5.00</p>
+            <p><strong>Available Stock:</strong> {{ product.quantity }}</p>
+
+            <!-- Quantity Selector -->
+            <div class="mb-3">
+                <label for="quantity" class="form-label"><strong>Quantity:</strong></label>
+                <input type="number" id="quantity" class="form-control" min="1" max="{{ product.quantity }}" value="1">
+            </div>
+
+            <!-- Message Container -->
+            <div id="message-container" class="alert d-none"></div>
+
+            <!-- Add to Cart Button -->
+            <button id="add-to-cart" class="btn btn-primary mt-3" data-product-id="{{ product.id }}">Add to Cart</button>
+        </div>
     </div>
-</div> 
+
+    <!-- Product Stats Chart -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h3 class="text-center">Product Sales, Views & Total Sold</h3>
+            <div class="chart-container" style="position: relative; height: 300px; width: 100%;">
+            <canvas id="productStatsChart"></canvas> <!-- Chart Container -->
+        </div>
+    </div>
+</div>  
+
+<!-- jQuery & Chart.js -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+$(document).ready(function() {
+    var ctx = document.getElementById('productStatsChart').getContext('2d');
+    var productStatsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['{{ product.name }}'],  
+            datasets: [
+                {
+                    label: 'Sold in 24 Hours',
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    data: [0]
+                },
+                {
+                    label: 'Views in 24 Hours',
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    data: [0]
+                },
+                {
+                    label: 'Total Sold',
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    data: [0]
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // ✅ Allows height customization
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top'
+                }
+            }
+        }
+    });
+
+    function updateChartData() {
+        $.ajax({
+            url: "{% url 'product_stats' product.id %}",  // ✅ Fetch stats for this product
+            type: "GET",
+            dataType: "json",
+            success: function(response) {
+                if (!response.error) {
+                    productStatsChart.data.datasets[0].data = [response.sold_in_24_hours];
+                    productStatsChart.data.datasets[1].data = [response.views_in_24_hours];
+                    productStatsChart.data.datasets[2].data = [response.total_sold]; // ✅ Total Sold Added
+                    productStatsChart.update();
+                }
+            },
+            error: function() {
+                console.log("Error fetching product stats.");
+            }
+        });
+    }
+
+    updateChartData(); // Initial call
+    setInterval(updateChartData, 10000); // Auto-refresh every 10 seconds
+
+    // Add to Cart AJAX
+    $("#add-to-cart").click(function() {
+        var productId = $(this).data("product-id");
+        var quantity = $("#quantity").val();  
+
+        $.ajax({
+            url: "{% url 'add_to_basket' product.id %}",
+            type: "POST",
+            data: {
+                'quantity': quantity,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            dataType: "json",
+            success: function(response) {
+                var messageContainer = $("#message-container");
+                if (response.success) {
+                    messageContainer.removeClass("d-none alert-danger").addClass("alert-success").text(response.message);
+                } else {
+                    messageContainer.removeClass("d-none alert-success").addClass("alert-danger").text(response.error || "Failed to add to cart.");
+                }
+            },
+            error: function() {
+                $("#message-container").removeClass("d-none alert-success").addClass("alert-danger").text("Something went wrong. Please try again.");
+            }
+        });
+    });
+});
+</script>
+
 {% endblock %}
- 
+  

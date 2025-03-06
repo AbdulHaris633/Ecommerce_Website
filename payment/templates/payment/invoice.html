@@ -1,0 +1,51 @@
+{% extends "catalogue/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Order Invoice</h2>
+    <div class="alert alert-success">
+        <h4>Thank you, <strong>{{ user.username }}</strong>, for ordering from TechNest!</h4>
+        <p>Your order has been successfully placed.</p>
+    </div>   
+ 
+    <div class="row">
+        <!-- Order Details -->
+        <div class="col-md-6">
+            <h4>Order Summary</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.product }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>PKR {{ item.price }}</td>
+                        <td>PKR {{ item.total }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-end"><strong>Total Price: PKR {{ total_price }}</strong></div>
+        </div>
+
+        <!-- Shipping Details -->
+        <div class="col-md-6">
+            <h4>Shipping Details</h4>
+            <p><strong>Address:</strong> {{ shipping_address }}</p>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'homepage1' %}" class="btn btn-primary">Continue Shopping</a>  
+    </div>  
+</div>  
+{% endblock %}   
+ 
