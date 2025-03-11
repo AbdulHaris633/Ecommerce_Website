@@ -1,9 +1,8 @@
 from decimal import Decimal
 
-from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.serializers.serializers import *
@@ -13,7 +12,7 @@ from catalogue.models import *
 
 class ProductClassAPIView(generics.ListCreateAPIView):
     serializer_class = ProductClassSerializer
-    queryset = ProductClass.objects.all()
+    queryset = ProductClass.objects.all() 
 
 
 class ProductCLassDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -45,7 +44,7 @@ class CategoryCLassDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 #         return Response( status=status.HTTP_200_OK)
 
 
-class ProductCreateAPIView(generics.ListCreateAPIView):
+class ProductCreateAPIView(generics.ListCreateAPIView): 
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
 
@@ -91,7 +90,7 @@ class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def my_basket(request):
     basket = Basket(request)
     basket_items = []
@@ -109,7 +108,7 @@ def my_basket(request):
 
 
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def add_to_basket(request):
     basket = Basket(request)
     data_from_frontent = list(request.data["products"])
@@ -122,7 +121,7 @@ def add_to_basket(request):
 
 
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def remove_from_basket(request):
     basket = Basket(request)
     data_from_frontent = list(request.data["products"])
@@ -135,7 +134,7 @@ def remove_from_basket(request):
 
 
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def delete_from_basket(request):
     basket = Basket(request)
     product_id = request.data.get("product_id")
@@ -160,7 +159,7 @@ def delete_from_basket(request):
 
 
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def checkout(request):
     basket = Basket(request)
 
