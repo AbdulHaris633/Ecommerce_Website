@@ -32,6 +32,12 @@ def homepage(request):
 
     return render(request, "catalogue/homepage.html")
 
+@login_required     
+def homepage2(request):
+
+    return render(request, "catalogue/adminhomepage.html")
+
+
 @login_required 
 def product_detail(request, product_id): 
     product = Product.objects.get(id=product_id)

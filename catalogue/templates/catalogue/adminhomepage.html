@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Dashboard</h2>
+        <p>Easily update, delete, and add new products, product classes, and categories with these quick-access buttons.</p>
+
+        <div class="buttons">
+            <a href="http://127.0.0.1:8000/admin/catalogue/productclass/" class="btn" target="_blank">
+                <i class="fas fa-box"></i> Product Class
+            </a>
+            <a href="http://127.0.0.1:8000/admin/catalogue/product/" class="btn" target="_blank">
+                <i class="fas fa-cube"></i> Product
+            </a>
+            <a href="http://127.0.0.1:8000/admin/catalogue/category/" class="btn" target="_blank">
+                <i class="fas fa-list"></i> Categories
+            </a>
+        </div>
+    </div>  
+</body>
+</html>
+   
+   

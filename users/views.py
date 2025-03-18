@@ -16,7 +16,7 @@ def register(request):
             user = User.objects.create_user(
                 username=form.cleaned_data['username'],  
                 email=form.cleaned_data['email'],
-                password=form.cleaned_data['password']
+                password=form.cleaned_data['password']  
             )
             UserProfile.objects.create(user=user)
             messages.success(request, "Registration successful! You can now log in.")
@@ -24,8 +24,8 @@ def register(request):
     else:
         form = RegistrationForm() 
     return render(request, "users/register.html", {"form": form}) 
+  
 
-      
 def custom_login_view(request):  
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -36,8 +36,10 @@ def custom_login_view(request):
             if user is not None:
                 login(request, user)
                 print("Session Data:", request.session.items()) 
-                messages.success(request, f"Welcome back, {username}!")
-                return redirect('homepage1')  # Or another valid URL 
+                messages.success(request, f"Welcome back, {username}!")  
+                if user.is_superuser:
+                    return redirect('homepage2')        
+                return redirect('homepage1') 
             else:
                 messages.error(request, "Invalid username or password.") 
         else:
@@ -49,5 +51,4 @@ def custom_login_view(request):
                 
 def custom_logout_view(request):
     logout(request)
-    messages.success(request, "You have been logged out successfully.")
     return redirect('/users/login/')    
