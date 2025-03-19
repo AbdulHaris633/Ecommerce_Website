@@ -67,7 +67,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        location.reload(); // Reload page to update basket
+                        location.reload(); 
                     } else {
                         showErrorMessage(data.error);
                     }
@@ -84,7 +84,7 @@
                 document.body.insertBefore(errorBox, document.body.firstChild);
             }
             errorBox.innerHTML = `<p>${message}</p>`;
-            setTimeout(() => errorBox.remove(), 3000); // Remove after 3 sec
+            setTimeout(() => errorBox.remove(), 3000); 
         }
     });
     </script>

@@ -16,7 +16,7 @@ class Basket:
         
     def get_quantity(self, product_id):
         """Retrieve the quantity of a product in the basket."""
-        product_id = str(product_id)  # Ensure it's a string since session keys are stored as strings
+        product_id = str(product_id) 
         return self.basket.get(product_id, {}).get("quantity", 0)
 
     def add(self, product, quantity=1, override_quantity=False):

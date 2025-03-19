@@ -1,4 +1,4 @@
-/* General Styles */
+
 body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(to right, #141e30, #243b55);
@@ -8,7 +8,7 @@ body {
     padding: 0;
 }
 
-/* Container */
+
 .container {
     max-width: 500px;
     margin: 100px auto;
@@ -18,7 +18,7 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Heading */
+
 h2 {
     font-size: 28px;
     margin-bottom: 20px;
@@ -26,14 +26,14 @@ h2 {
     letter-spacing: 2px;
 }
 
-/* Button Container */
+
 .buttons {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-/* Buttons */
+
 .btn {
     display: flex;
     align-items: center;
@@ -55,12 +55,12 @@ h2 {
     transform: scale(1.05);
 }
 
-/* Icons */
+
 .btn i {   
     margin-right: 10px;
 }
 
-/* Creative Glow Effect */
+
 .glow {
     animation: glowEffect 1.5s infinite alternate;
 }

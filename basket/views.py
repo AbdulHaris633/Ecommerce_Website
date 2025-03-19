@@ -48,7 +48,7 @@ def remove_from_basket(request, product_id: UUID):
         product.quantity += 1  # Add back only one unit (since we're decreasing by 1)
         product.save()
 
-    # Remove one unit from basket
+    
     basket.remove(product_id)
 
     return redirect("basket_detail") 
@@ -76,7 +76,7 @@ def delete_from_basket(request, product_id: UUID):
         product.quantity += quantity_to_restore
         product.save()
 
-    # Remove the product from the basket
+
     basket.delete(product_id)
 
     return redirect("basket_detail")    

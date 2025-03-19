@@ -34,7 +34,7 @@ def checkout(request):
         shipping_address = request.POST.get("shipping_address")
 
         if not shipping_address:  # Ensure address is entered
-            messages.error(request, "Shipping address is required!")
+            # messages.error(request, "Shipping address is required!")  
             return render(request, "checkout/checkout.html", {"items": items, "total_price": total_price})
 
         # **Update product sales data**

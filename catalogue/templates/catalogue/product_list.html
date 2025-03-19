@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container mt-4">
     <div class="row">
-        <!-- Categories on the left -->
+       
         <div class="col-md-3 bg-light p-3 rounded shadow-sm">
             <h5 class="mb-3">Categories</h5>
             <ul class="nav flex-column">
@@ -23,7 +23,7 @@
             </ul>
         </div>
 
-        <!-- Products on the right -->
+        
         <div class="col-md-9">
             <div class="row">
                 {% for product in all_product %} 
@@ -39,7 +39,7 @@
                             <p class="card-text">{{ product.description }}</p> 
                             <p><strong>Price:</strong> PKR {{ product.price }}</p>  
                             <p><strong>Rating:</strong> {{ product.rating }} / 5.00</p>    
-                            {% comment %} <a href="{% url 'add_to_basket' product.id %}" class="btn btn-primary">Add to Cart</a>   {% endcomment %}
+                            <p><strong>Available Stock:</strong> {{ product.quantity }}</p>     
                         </div> 
                     </div>  
                 </div>

@@ -1,13 +1,13 @@
-/* Ensure full width */
+
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Prevent scrolling */
+    overflow: hidden; 
 }
 
 .background-container {
-    position: fixed; /* Covers entire screen */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100vw;
@@ -16,19 +16,19 @@ html, body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: -1; /* Keeps it behind content */
+    z-index: -1; 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Text overlay */
+
 .overlay-text {
     color: white;
     font-size: 3rem;
     font-weight: bold;
     text-align: center;
-    background: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background */
+    background: rgba(0, 0, 0, 0.6); 
     padding: 20px 40px;
     border-radius: 10px;
 }

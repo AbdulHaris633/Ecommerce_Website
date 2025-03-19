@@ -4,12 +4,12 @@
 {% block content %}
 <div class="container mt-4">
     <div class="row">
-        <!-- Product Image -->
+       
         <div class="col-md-6">
             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
         </div> 
         
-        <!-- Product Details -->
+        
         <div class="col-md-6">
             <h2>{{ product.name }}</h2>
             <p>{{ product.description }}</p>
@@ -17,16 +17,16 @@
             <p><strong>Rating:</strong> {{ product.rating }} / 5.00</p>
             <p><strong>Available Stock:</strong> {{ product.quantity }}</p>
 
-            <!-- Quantity Selector -->
+            
             <div class="mb-3">
                 <label for="quantity" class="form-label"><strong>Quantity:</strong></label>
                 <input type="number" id="quantity" class="form-control" min="1" max="{{ product.quantity }}" value="1">
             </div>
 
-            <!-- Message Container -->
+           
             <div id="message-container" class="alert d-none"></div>
 
-            <!-- Add to Cart Button -->
+           
             <button id="add-to-cart" class="btn btn-primary mt-3" data-product-id="{{ product.id }}">Add to Cart</button>
         </div>
     </div>
@@ -36,7 +36,7 @@
         <div class="col-md-12">
             <h3 class="text-center">Product Sales, Views & Total Sold</h3>
             <div class="chart-container" style="position: relative; height: 300px; width: 100%;">
-            <canvas id="productStatsChart"></canvas> <!-- Chart Container -->
+            <canvas id="productStatsChart"></canvas> 
         </div>
     </div>
 </div>  
@@ -78,7 +78,7 @@ $(document).ready(function() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false, // ✅ Allows height customization
+            maintainAspectRatio: false,
             scales: {
                 y: {
                     beginAtZero: true
@@ -94,14 +94,14 @@ $(document).ready(function() {
 
     function updateChartData() {
         $.ajax({
-            url: "{% url 'product_stats' product.id %}",  // ✅ Fetch stats for this product
+            url: "{% url 'product_stats' product.id %}",  // Fetch stats for this product
             type: "GET",
             dataType: "json",
             success: function(response) {
                 if (!response.error) {
                     productStatsChart.data.datasets[0].data = [response.sold_in_24_hours];
                     productStatsChart.data.datasets[1].data = [response.views_in_24_hours];
-                    productStatsChart.data.datasets[2].data = [response.total_sold]; // ✅ Total Sold Added
+                    productStatsChart.data.datasets[2].data = [response.total_sold]; //  Total Sold Added
                     productStatsChart.update();
                 }
             },
@@ -111,8 +111,8 @@ $(document).ready(function() {
         });
     }
 
-    updateChartData(); // Initial call
-    setInterval(updateChartData, 10000); // Auto-refresh every 10 seconds
+    updateChartData(); 
+    setInterval(updateChartData, 10000); 
 
     // Add to Cart AJAX
     $("#add-to-cart").click(function() {
