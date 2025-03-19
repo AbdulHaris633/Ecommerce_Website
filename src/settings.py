@@ -10,8 +10,8 @@ DEBUG = True
 
 SITE_ID = 1
 
-ALLOWED_HOSTS = ["13.48.45.103", "*", ""]
-
+# ALLOWED_HOSTS = ["13.48.45.103", "*", ""]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']   
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -132,4 +132,5 @@ IMPLE_JWT = {
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
- 
+
+AUTH_USER_MODEL = 'users.CustomUsermodel'      

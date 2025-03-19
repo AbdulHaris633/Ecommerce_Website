@@ -5,15 +5,18 @@ from django.contrib import messages
 
 def user_register_view(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)  
+        form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect('users:login')  
+            return redirect('users:login')
+        else:
+            messages.error(request, "Please correct the errors below.")
     else:
         form = RegisterForm()
-    return render(request, 'users/register.html', {'form': form}) 
+    
+    return render(request, 'users/register.html', {'form': form})   
 
 def user_login_view(request):
     if request.method == "POST":

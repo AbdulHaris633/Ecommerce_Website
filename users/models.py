@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class CustomUsermodel(AbstractUser):
-    phone = models.CharField(max_length=15, blank=True, null=True)  
+    email = models.EmailField(unique=True)   
       
     groups = models.ManyToManyField(
         "auth.Group",
@@ -13,4 +13,4 @@ class CustomUsermodel(AbstractUser):
         "auth.Permission",
         related_name="custom_user_permissions",  # Avoid conflict
         blank=True
-    )      
+    )         
