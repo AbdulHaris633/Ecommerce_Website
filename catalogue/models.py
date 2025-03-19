@@ -30,10 +30,10 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     description = models.TextField(max_length=255, blank=True, null=True)
     image = models.ImageField(upload_to="images/", blank=True, null=True)
-    quantity = models.PositiveIntegerField(default=0)  # Stock availability
-    total_sold = models.PositiveIntegerField(default=0)  # Total units sold
-    sold_in_24_hours = models.PositiveIntegerField(default=0)  # Sales in last 24 hours
-    views_in_24_hours = models.PositiveIntegerField(default=0)  # Views in last 24 hours
+    quantity = models.PositiveIntegerField(default=0) 
+    total_sold = models.PositiveIntegerField(default=0) 
+    sold_in_24_hours = models.PositiveIntegerField(default=0) 
+    views_in_24_hours = models.PositiveIntegerField(default=0) 
      
 
     def __str__(self):
