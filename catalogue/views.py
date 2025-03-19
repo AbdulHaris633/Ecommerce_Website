@@ -53,12 +53,12 @@ def product_stats(request, product_id):
     try:
         product = Product.objects.get(id=product_id)
         data = {
-            "label": product.name,  # Single value, not a list
-            "sold_in_24_hours": product.sold_in_24_hours or 0,  # Single value
+            "label": product.name, 
+            "sold_in_24_hours": product.sold_in_24_hours or 0, 
             "views_in_24_hours": product.views_in_24_hours or 0,  
             "total_sold": product.total_sold or 0  
         }
-        return JsonResponse(data)
+        return JsonResponse(data) 
     except Product.DoesNotExist:
         return JsonResponse({"error": "Product not found"}, status=404) 
 

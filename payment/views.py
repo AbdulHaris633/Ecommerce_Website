@@ -1,13 +1,16 @@
 from django.conf import *
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
 @csrf_exempt
-def success(request):
-    request.session[settings.BASKET_SESSION_ID] = {}
-    return HttpResponse("payment completed")
 
+@login_required
+def invoice(request):
+    order_details = request.session.get("order_details", {})
 
-def fail(request):
-    return HttpResponse("payment failed")
+    if not order_details or not order_details.get("items"):
+        return redirect("checkout")
+
+    return render(request, "payment/invoice.html", order_details)        
