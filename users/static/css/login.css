@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
@@ -9,6 +10,7 @@ body {
     height: 100vh; 
 }
 
+/* Container */
 .container {
     background-color: white;
     padding: 30px;
@@ -18,6 +20,7 @@ body {
     max-width: 90%;
 }
 
+/* Headings & Text */
 h2 {
     text-align: center;
     color: #2c3e50;
@@ -33,15 +36,19 @@ p {
     margin-bottom: 20px;
 }
 
+/* Forms */
 form {
     margin-top: 20px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-input[type="text"], input[type="password"], input[type="email"] {
+/* Input Fields */
+input[type="text"], 
+input[type="password"], 
+input[type="email"] {
     width: 100%;
     padding: 12px;
     margin: 5px 0;
@@ -51,12 +58,15 @@ input[type="text"], input[type="password"], input[type="email"] {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+input[type="email"]:focus {
     border-color: #3498db;
     box-shadow: 0px 0px 8px rgba(52, 152, 219, 0.2);
     outline: none;
 }
 
+/* Buttons */
 button {
     width: 100%;
     padding: 12px;
@@ -74,6 +84,11 @@ button:hover {
     background-color: #2980b9;
 }
 
+button:focus {
+    outline: 2px solid #1c6ea4;
+}
+
+/* Links */
 a {
     color: #3498db;
     text-decoration: none;
@@ -86,6 +101,7 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Messages */
 .message {
     margin-bottom: 20px;
     padding: 12px;
@@ -106,40 +122,11 @@ a:hover {
     border: 1px solid #e74c3c;
 }
 
-/* Additional E-commerce Styling */
-.product-image {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.price {
-    font-size: 18px;
-    font-weight: 700;
-    color: #2ecc71;
-    margin-bottom: 10px;
-}
-
-.rating {
-    color: #f1c40f;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.add-to-cart {
-    background-color: #e67e22;
-    transition: background-color 0.3s ease;
-}
-
-.add-to-cart:hover {
-    background-color: #d35400;
-}
-
 /* Responsive Design */
 @media (max-width: 480px) {
     .container {
         padding: 20px;
-        width: 100%;
+        width: 100%; 
     }
 
     h2 {
@@ -149,4 +136,5 @@ a:hover {
     button {
         font-size: 14px;
     }
-} 
+}
+  

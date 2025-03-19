@@ -5,42 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
-</head>
-<body>       
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}"> 
+</head> 
+<body>        
     <div class="container">
-        <h2>Create an Account</h2>
+        <h2>Create an Account</h2> 
         <p class="subtitle">Join us and start your journey today</p>
-
-        <!-- Display messages (e.g., success or error) -->
+    
         {% if messages %}
-            {% for message in messages %}
-                <p class="message {% if message.tags == 'success' %}success{% else %}error{% endif %}">
-                    {{ message }}
-                </p>
-            {% endfor %}
-        {% endif %}
-
+            <div class="messages">
+                {% for message in messages %}
+                    <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}  
+ 
         <!-- Registration Form -->
         <form method="POST">
             {% csrf_token %}
             <div class="form-group">
-                <label for="{{ form.username.id_for_label }}">Username:</label>
+                <label for="id_username">Username:</label>
                 {{ form.username }}
+                {% if form.username.errors %}
+                    <small class="error">{{ form.username.errors.0 }}</small>
+                {% endif %}
         
-                <label for="{{ form.email.id_for_label }}">Email Address:</label>
+                <label for="id_email">Email Address:</label>
                 {{ form.email }}
+                {% if form.email.errors %}
+                    <small class="error">{{ form.email.errors.0 }}</small>
+                {% endif %}
         
-                <label for="{{ form.password.id_for_label }}">Password:</label>
-                {{ form.password }}
+                <label for="id_password1">Password:</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <small class="error">{{ form.password1.errors.0 }}</small>
+                {% endif %}
         
-                <label for="{{ form.confirm_password.id_for_label }}">Confirm Password:</label>
-                {{ form.confirm_password }}
+                <label for="id_password2">Confirm Password:</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <small class="error">{{ form.password2.errors.0 }}</small>
+                {% endif %}
             </div>
-            <button type="submit">Sign Up</button> 
+            <button type="submit">Sign Up</button>   
         </form>
-         
-
+        
         <p class="additional-options">Already have an account? <a href="{% url 'users:login' %}">Login here</a></p>
     </div> 
 
