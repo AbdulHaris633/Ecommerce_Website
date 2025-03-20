@@ -21,7 +21,6 @@ urlpatterns = [
     path("adminhomepage/", homepage2, name="homepage2"),  
     path("product/detail/<uuid:product_id>/", product_detail, name="product_detail"),
     path('product/<uuid:product_id>/stats/', product_stats, name='product_stats'), 
- 
-    
+  
 ]  
     

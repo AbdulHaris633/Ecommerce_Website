@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block content %}
-<h2> <strong>{{ user.username }}</strong> Basket</h2>
+<h2> <strong>{{ user.username }}</strong > Cart</h2>   
 {% comment %} {% if messages %}
 <div class="alert alert-danger" id="error-message">
     {% for message in messages %}
         <p>{{ message }}</p>
-    {% endfor %}
-</div>  
+    {% endfor %}    
+</div>     
 {% endif %}  {% endcomment %}
 
 <table class="table">  

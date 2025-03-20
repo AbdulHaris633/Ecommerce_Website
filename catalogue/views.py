@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import F
 from .models import Category, Product
 from django.http import JsonResponse
+
 @login_required 
 def category_list(request):
     # print(f"User: {request.user}, Authenticated: {request.user.is_authenticated}") 

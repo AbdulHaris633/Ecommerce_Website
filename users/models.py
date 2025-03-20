@@ -13,4 +13,4 @@ class CustomUsermodel(AbstractUser):
         "auth.Permission",
         related_name="custom_user_permissions",  # Avoid conflict
         blank=True
-    )         
+    )           

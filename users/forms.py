@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from users.models import CustomUsermodel
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField(required=True)  # Ensure email is required
+    email = forms.EmailField(required=True)
 
     class Meta:
         model = CustomUsermodel

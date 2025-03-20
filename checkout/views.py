@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404  
 from django.contrib import messages
 
-# @csrf_exempt     
+  
 @login_required  
 def checkout(request):
     basket = request.session.get(settings.BASKET_SESSION_ID, {})
