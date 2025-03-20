@@ -1,54 +1,68 @@
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    background: linear-gradient(to bottom right, #e0f7ff, #ffffff);
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
+    height: 100vh;
+    position: relative;
+}
+
+/* Store Name Styling */
+.store-name {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #3498db, #2980b9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* Container */
 .container {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
     width: 350px;
     max-width: 90%;
+    text-align: center;
 }
 
-/* Headings & Text */
+/* Headings */
 h2 {
-    text-align: center;
     color: #2c3e50;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 26px;
     font-weight: 600;
 }
 
-p {
-    text-align: center;
-    font-size: 14px;
-    color: #7f8c8d;
+/* Form Groups */
+.form-group {
+    text-align: left;
     margin-bottom: 20px;
 }
 
-/* Forms */
-form {
-    margin-top: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
+/* Labels */
+label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 5px;
 }
 
 /* Input Fields */
 input[type="text"], 
-input[type="password"], 
-input[type="email"] {
+input[type="password"] {
     width: 100%;
     padding: 12px;
     margin: 5px 0;
@@ -56,17 +70,22 @@ input[type="email"] {
     border-radius: 8px;
     font-size: 14px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+    box-sizing: border-box;
 }
 
-input[type="text"]:focus, 
-input[type="password"]:focus, 
-input[type="email"]:focus {
+/* Ensure input and button have the same width */
+input, button {
+    width: 100%;
+}
+
+input:focus {
     border-color: #3498db;
-    box-shadow: 0px 0px 8px rgba(52, 152, 219, 0.2);
+    box-shadow: 0px 0px 8px rgba(52, 152, 219, 0.4);
     outline: none;
 }
 
-/* Buttons */
+/* Button Styling */
 button {
     width: 100%;
     padding: 12px;
@@ -78,25 +97,27 @@ button {
     font-size: 16px;
     font-weight: 600;
     transition: background-color 0.3s ease;
+    margin-top: 5px;
+    box-sizing: border-box;
 }
 
 button:hover {
     background-color: #2980b9;
 }
 
-button:focus {
-    outline: 2px solid #1c6ea4;
+/* Additional Options */
+.additional-options {
+    font-size: 14px;
+    margin-top: 15px;
 }
 
-/* Links */
-a {
+.additional-options a {
     color: #3498db;
     text-decoration: none;
-    font-size: 14px;
     transition: color 0.3s ease;
 }
 
-a:hover {
+.additional-options a:hover {
     color: #1c6ea4;
     text-decoration: underline;
 }
@@ -126,7 +147,7 @@ a:hover {
 @media (max-width: 480px) {
     .container {
         padding: 20px;
-        width: 100%; 
+        width: 100%;
     }
 
     h2 {
@@ -137,4 +158,4 @@ a:hover {
         font-size: 14px;
     }
 }
-  
+     
