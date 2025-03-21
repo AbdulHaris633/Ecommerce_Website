@@ -64,4 +64,7 @@ def product_stats(request, product_id):
         return JsonResponse({"error": "Product not found"}, status=404) 
 
 
-  
+
+def custom_404_view(request, exception):
+    return render(request, "catalogue/404.html", status=404)
+        

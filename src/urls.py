@@ -3,7 +3,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 # from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView 
-
+handler404 = "catalogue.views.custom_404_view"  
+ 
 from api.views.views import *
 
 urlpatterns = [
@@ -32,3 +33,5 @@ urlpatterns = [
     # path("api/delete_from_basket/", delete_from_basket), 
     # path("api/checkout/", checkout),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+  
+handler404 = "catalogue.views.custom_404_view"  
